@@ -12,14 +12,14 @@ namespace Airline_Reservation_System
         static void printSeats(bool[] seats)
         {
 
-            Console.WriteLine("First Class Seats: ");
+            Console.WriteLine("First Class Seats (1-5):");
 
             for (int i = 0; i < 5; i++)
             {
                 Console.Write(seats[i] ? "Booked " : "Empty ");
             }
 
-            Console.WriteLine("\nEconomy Seats: ");
+            Console.WriteLine("\nEconomy Seats (6-10):");
 
             for (int i = 5; i < 10; i++)
             {
@@ -64,6 +64,7 @@ namespace Airline_Reservation_System
             bool isNum, firstClassFull, economyFull;
             bool[] seats = new bool[10];
             int selectedSeat = 0;
+            string userInput;
 
             for (int i = 0; i < 10; i++)
             {
@@ -104,12 +105,67 @@ namespace Airline_Reservation_System
                     }
                     else
                     {
+                        bool userConfirm = false;
                         if (firstClassFull && !economyFull)
                         {
-                            Console.WriteLine("The First Class section is full. Please select a seat in the Economy section.");
+                            while (!userConfirm)
+                            {
+                                Console.WriteLine("The First Class section is full.");
+                                Console.WriteLine("Would you like to book a seat in the economy section instead? (Y/N): ");
+                                userInput = Console.ReadLine();
+
+                                if (userInput == "Y" || userInput == "y")
+                                {
+                                    for (int i = 5; i < 10; i++)
+                                    {
+                                        if (seats[i] == false)
+                                        {
+                                            seats[i] = true;
+                                            Console.WriteLine("Seat " + (i + 1) + " has been automatically booked in the economy section.");
+                                            break;
+                                        }
+                                    }
+                                    userConfirm = true;
+                                } else if (userInput == "N" || userInput == "n")
+                                {
+                                    Console.WriteLine("The next flight leaves in 3 hours.");
+                                    userConfirm = true;
+                                } else
+                                {
+                                    Console.WriteLine("Please enter a valid selection.");
+                                }
+                            }
                         } else if (economyFull && !firstClassFull)
                         {
-                            Console.WriteLine("The Economy section is full. Please select a seat in the First Class section.");
+                            while (!userConfirm)
+                            {
+                                Console.WriteLine("The Economy section is full.");
+                                Console.WriteLine("Would you like to book a seat in the economy section instead? (Y/N): ");
+                                userInput = Console.ReadLine();
+
+                                if (userInput == "Y" || userInput == "y")
+                                {
+                                    for (int i = 0; i < 5; i++)
+                                    {
+                                        if (seats[i] == false)
+                                        {
+                                            seats[i] = true;
+                                            Console.WriteLine("Seat " + (i + 1) + " has been automatically booked in the economy section.");
+                                            break;
+                                        }
+                                    }
+                                    userConfirm = true;
+                                }
+                                else if (userInput == "N" || userInput == "n")
+                                {
+                                    Console.WriteLine("The next flight leaves in 3 hours.");
+                                    userConfirm = true;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Please enter a valid selection.");
+                                }
+                            }
                         } else
                         {
                             Console.WriteLine("That seat has already been booked. Please select a different seat.");

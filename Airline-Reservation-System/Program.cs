@@ -12,19 +12,31 @@ namespace Airline_Reservation_System
         static void printSeats(bool[] seats)
         {
 
-            Console.WriteLine("First Class Seats (1-5):");
+            Console.WriteLine("First Class Seats (Seats 1-5):");
+
+            Console.WriteLine("--------------------------------------");
+            Console.Write("| ");
 
             for (int i = 0; i < 5; i++)
             {
-                Console.Write(seats[i] ? "Booked " : "Empty ");
+                Console.Write(seats[i] ? "Booked " : "Vacant ");
             }
 
-            Console.WriteLine("\nEconomy Seats (6-10):");
+            Console.Write("|");
+            Console.WriteLine("\n--------------------------------------");
+
+            Console.WriteLine("Economy Seats (Seats 6-10):");
+
+            Console.WriteLine("--------------------------------------");
+            Console.Write("| ");
 
             for (int i = 5; i < 10; i++)
             {
-                Console.Write(seats[i] ? "Booked " : "Empty ");
+                Console.Write(seats[i] ? "Booked " : "Vacant ");
             }
+
+            Console.Write("|");
+            Console.WriteLine("\n--------------------------------------");
         }
 
         static bool checkFirstClass(bool[] seats)
@@ -81,7 +93,7 @@ namespace Airline_Reservation_System
                 isNum = false;
                 while (!isNum || selectedSeat > 10 || selectedSeat < 1)
                 {
-                    Console.Write("\n\nPlease select a seat that you'd like to book. (-1 to quit): ");
+                    Console.Write("\nPlease select a seat that you'd like to book. (-1 to quit): ");
                     isNum = int.TryParse(Console.ReadLine(), out selectedSeat);
 
                     if (selectedSeat == -1) { break; }
@@ -111,7 +123,7 @@ namespace Airline_Reservation_System
                             while (!userConfirm)
                             {
                                 Console.WriteLine("The First Class section is full.");
-                                Console.WriteLine("Would you like to book a seat in the economy section instead? (Y/N): ");
+                                Console.Write("Would you like to book a seat in the economy section instead? (Y/N): ");
                                 userInput = Console.ReadLine();
 
                                 if (userInput == "Y" || userInput == "y")
@@ -140,7 +152,7 @@ namespace Airline_Reservation_System
                             while (!userConfirm)
                             {
                                 Console.WriteLine("The Economy section is full.");
-                                Console.WriteLine("Would you like to book a seat in the economy section instead? (Y/N): ");
+                                Console.Write("Would you like to book a seat in the economy section instead? (Y/N): ");
                                 userInput = Console.ReadLine();
 
                                 if (userInput == "Y" || userInput == "y")
